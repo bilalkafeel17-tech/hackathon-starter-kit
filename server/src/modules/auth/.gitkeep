@@ -1,0 +1,3 @@
+// Auth module — to be implemented
+// Exports: login, register, refresh, logout routes
+export {};

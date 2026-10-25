@@ -1,0 +1,97 @@
+### Task 3 Organization Setup Walkthrough
+### Base URL
+@baseUrl = http://localhost:5000/api
+
+### 1. Login as Admin
+# @name adminLogin
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@example.com",
+  "password": "AdminPassword123!"
+}
+
+### Store token from login response
+@adminToken = {{adminLogin.response.body.data.token}}
+
+### 2. Update Company Settings (Admin Only)
+PATCH {{baseUrl}}/settings
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{
+  "companyName": "HCM Lite Technologies Inc.",
+  "officeStart": "09:00",
+  "graceMinutes": 15,
+  "halfDayHours": 4.5,
+  "weekendDays": [0, 6],
+  "timezone": "Asia/Karachi",
+  "office": {
+    "lat": 24.8607,
+    "lng": 67.0011,
+    "radiusMeters": 250
+  }
+}
+
+### 3. View Settings (Public View for any Authenticated User)
+GET {{baseUrl}}/settings/public
+Authorization: Bearer {{adminToken}}
+
+### 4. Apply Suggested Leave Types (Admin Only)
+# Seeds 4 standard types: annual (14), casual (10), sick (8), unpaid (unlimited)
+POST {{baseUrl}}/leave-types/apply-suggestions
+Authorization: Bearer {{adminToken}}
+
+### 5. Create a Department (Admin Only)
+# @name createDepartment
+POST {{baseUrl}}/departments
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{
+  "name": "Engineering",
+  "code": "ENG",
+  "description": "Software development and infrastructure"
+}
+
+@departmentId = {{createDepartment.response.body.data._id}}
+
+### 6. Create a Designation linked to Department (Admin Only)
+POST {{baseUrl}}/designations
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{
+  "title": "Senior Software Engineer",
+  "departmentId": "{{departmentId}}",
+  "level": "L4"
+}
+
+### 7. Create a Public Holiday (Admin Only)
+POST {{baseUrl}}/holidays
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{
+  "name": "Pakistan Day",
+  "date": "2026-03-23"
+}
+
+### 8. Create an HR User (Admin Only)
+# Returns a temporary password exactly once
+# @name createHr
+POST {{baseUrl}}/users
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{
+  "name": "Sarah Connor",
+  "email": "sarah.hr@example.com"
+}
+
+@hrTempPassword = {{createHr.response.body.data.tempPassword}}
+
+### 9. Check Organization Setup Readiness
+GET {{baseUrl}}/org/readiness
+Authorization: Bearer {{adminToken}}

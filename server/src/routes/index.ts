@@ -1,0 +1,46 @@
+import { Router } from 'express';
+import healthRoutes from '../modules/health/health.routes';
+import setupRoutes from '../modules/setup/setup.routes';
+import authRoutes from '../modules/auth/auth.routes';
+import auditRoutes from '../modules/audit/audit.routes';
+import settingsRoutes from '../modules/settings/settings.routes';
+import departmentRoutes from '../modules/departments/department.routes';
+import designationRoutes from '../modules/designations/designation.routes';
+import leaveTypeRoutes from '../modules/leave-types/leave-type.routes';
+import holidayRoutes from '../modules/holidays/holiday.routes';
+import userRoutes from '../modules/users/user.routes';
+import orgRoutes from '../modules/org/org.routes';
+import employeeRoutes from '../modules/employees/employee.routes';
+import attendanceRoutes from '../modules/attendance/attendance.routes';
+import leaveRoutes from '../modules/leave/leave.routes';
+import payrollRoutes from '../modules/payroll/payroll.routes';
+import payslipRoutes from '../modules/payroll/payslip.routes';
+import announcementRoutes from '../modules/comms/announcement.routes';
+import notificationRoutes from '../modules/comms/notification.routes';
+import dashboardRoutes from '../modules/dashboard/dashboard.routes';
+import aiRoutes from '../modules/ai/ai.routes';
+
+const router = Router();
+
+router.use('/health', healthRoutes);
+router.use('/setup', setupRoutes);
+router.use('/auth', authRoutes);
+router.use('/audit-logs', auditRoutes);
+router.use('/settings', settingsRoutes);
+router.use('/departments', departmentRoutes);
+router.use('/designations', designationRoutes);
+router.use('/leave-types', leaveTypeRoutes);
+router.use('/holidays', holidayRoutes);
+router.use('/users', userRoutes);
+router.use('/org', orgRoutes);
+router.use('/employees', employeeRoutes);
+router.use('/attendance', attendanceRoutes);
+router.use('/leaves', leaveRoutes);
+router.use('/payroll', payrollRoutes);
+router.use('/payslips', payslipRoutes);
+router.use('/announcements', announcementRoutes);
+router.use('/notifications', notificationRoutes);
+router.use('/dashboard', dashboardRoutes);
+router.use('/ai', aiRoutes);
+
+export default router;

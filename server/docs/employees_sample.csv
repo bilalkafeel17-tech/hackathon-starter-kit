@@ -1,0 +1,3 @@
+employeeCode,name,email,phone,gender,dateOfBirth,joiningDate,department,designation,employmentType,basicSalary
+EMP-1001,John Doe,john.doe@acme.com,+1234567890,male,1990-05-15,2026-01-10,Engineering,Software Engineer,full_time,85000
+EMP-1002,Jane Smith,jane.smith@acme.com,+1987654321,female,1992-08-20,2026-02-01,Engineering,Software Engineer,full_time,90000

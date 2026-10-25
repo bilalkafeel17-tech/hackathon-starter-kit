@@ -1,0 +1,41 @@
+services:
+  - type: web
+    name: hcm-lite-server
+    env: node
+    region: singapore
+    plan: free
+    rootDir: server
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRES_IN
+        value: 7d
+      - key: CLIENT_URL
+        sync: false
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: COMPANY_NAME
+        sync: false
+      - key: AI_PROVIDER
+        sync: false
+      - key: AI_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GROK_API_KEY
+        sync: false
+      - key: AI_MODEL
+        sync: false
+      - key: AI_BASE_URL
+        sync: false
+    healthCheckPath: /api/health

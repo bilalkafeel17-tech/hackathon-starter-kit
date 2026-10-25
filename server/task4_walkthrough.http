@@ -1,0 +1,106 @@
+### Task 4 Employees, Salary, Directory, 360, and CSV Walkthrough
+@baseUrl = http://localhost:5000/api
+
+### 1. Login as HR
+# @name hrLogin
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "sarah.hr@example.com",
+  "password": "NewHrPassword123!"
+}
+
+### Store HR token
+@hrToken = {{hrLogin.response.body.data.token}}
+
+### 2. Fetch Active Departments to get an ID for Employee Registration
+# @name getDepartments
+GET {{baseUrl}}/departments?isActive=true
+Authorization: Bearer {{hrToken}}
+
+@departmentId = {{getDepartments.response.body.data.departments[0]._id}}
+
+### 3. Fetch Designations for this Department
+# @name getDesignations
+GET {{baseUrl}}/designations?departmentId={{departmentId}}
+Authorization: Bearer {{hrToken}}
+
+@designationId = {{getDesignations.response.body.data[0]._id}}
+
+### 4. Register an Employee (HR Only)
+# Creates Employee record, initial SalaryStructure, and User login with temporary password
+# @name registerEmployee
+POST {{baseUrl}}/employees
+Authorization: Bearer {{hrToken}}
+Content-Type: application/json
+
+{
+  "name": "Alex Mercer",
+  "email": "alex.mercer@example.com",
+  "phone": "+92-300-9876543",
+  "gender": "male",
+  "dateOfBirth": "1994-04-12",
+  "joiningDate": "2026-01-15",
+  "departmentId": "{{departmentId}}",
+  "designationId": "{{designationId}}",
+  "employmentType": "full_time",
+  "status": "probation",
+  "emergencyContact": {
+    "name": "Dana Mercer",
+    "phone": "+92-300-1122334",
+    "relation": "Sister"
+  },
+  "salary": {
+    "basic": 85000,
+    "extraAllowance": 3000
+  }
+}
+
+@employeeId = {{registerEmployee.response.body.data.employee._id}}
+@employeeTempPassword = {{registerEmployee.response.body.data.tempPassword}}
+
+### 5. Search Employee Directory (HR / Admin / Employee)
+GET {{baseUrl}}/employees?q=Alex&status=probation
+Authorization: Bearer {{hrToken}}
+
+### 6. View Employee 360 Profile (HR and Admin see salary, Employee does not)
+GET {{baseUrl}}/employees/{{employeeId}}/360
+Authorization: Bearer {{hrToken}}
+
+### 7. Set New Salary Structure Version (HR Only)
+# Creates append-only SalaryStructure row
+PUT {{baseUrl}}/employees/{{employeeId}}/salary
+Authorization: Bearer {{hrToken}}
+Content-Type: application/json
+
+{
+  "basic": 95000,
+  "extraAllowance": 4000,
+  "effectiveFrom": "2026-06-01"
+}
+
+### 8. View Salary History (HR and Admin Only)
+GET {{baseUrl}}/employees/{{employeeId}}/salary
+Authorization: Bearer {{hrToken}}
+
+### 9. Download CSV Import Template
+GET {{baseUrl}}/employees/import/template
+Authorization: Bearer {{hrToken}}
+
+### 10. Dry-Run CSV Import (validates without saving)
+POST {{baseUrl}}/employees/import?dryRun=true
+Authorization: Bearer {{hrToken}}
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="employees_sample.csv"
+Content-Type: text/csv
+
+employeeCode,name,email,phone,gender,dateOfBirth,joiningDate,department,designation,employmentType,basicSalary
+EMP-8001,John Doe,john.doe@example.com,+1234567890,male,1990-05-15,2026-01-10,Engineering,Senior Software Engineer,full_time,85000
+--boundary--
+
+### 11. Export Employees CSV (Streams sanitized CSV with formula injection protection)
+GET {{baseUrl}}/employees/export
+Authorization: Bearer {{hrToken}}

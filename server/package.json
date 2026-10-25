@@ -1,0 +1,53 @@
+{
+  "name": "hackathon-starter-server",
+  "version": "1.0.0",
+  "description": "HCM Lite API — Express + TypeScript + MongoDB",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "rimraf dist && tsc",
+    "start": "node dist/server.js",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@types/multer": "^2.3.0",
+    "@types/pdfkit": "^0.17.7",
+    "bcryptjs": "^3.0.3",
+    "compression": "^1.8.2",
+    "cors": "^2.8.5",
+    "csv-parse": "^7.0.3",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-mongo-sanitize": "^2.2.0",
+    "express-rate-limit": "^8.7.1",
+    "geolib": "^4.0.0",
+    "helmet": "^8.3.0",
+    "hpp": "^0.2.3",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^8.9.5",
+    "multer": "^2.5.0",
+    "pdfkit": "^0.20.2",
+    "pino": "^10.4.0",
+    "pino-http": "^11.0.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/compression": "^1.8.1",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/helmet": "^0.0.48",
+    "@types/hpp": "^0.2.7",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^22.10.7",
+    "@types/supertest": "^7.2.1",
+    "mongodb-memory-server": "^11.3.0",
+    "pino-pretty": "^13.2.0",
+    "rimraf": "^6.0.1",
+    "supertest": "^7.3.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3",
+    "vitest": "^5.0.5"
+  }
+}

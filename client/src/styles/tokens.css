@@ -1,0 +1,169 @@
+@import '@fontsource/source-serif-4/600.css';
+@import '@fontsource/ibm-plex-sans/400.css';
+@import '@fontsource/ibm-plex-sans/500.css';
+@import '@fontsource/ibm-plex-sans/600.css';
+@import '@fontsource/ibm-plex-mono/400.css';
+@import '@fontsource/ibm-plex-mono/500.css';
+@import '@fontsource/ibm-plex-mono/600.css';
+
+:root {
+  /* Fonts */
+  --font-serif: 'Source Serif 4', Georgia, serif;
+  --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Light Theme Tokens */
+  --color-bg: #F4F5F7;
+  --color-surface: #FFFFFF;
+  --color-surface-2: #EDEFF3;
+  --color-border: #DCE0E7;
+  --color-border-strong: #C3C9D3;
+
+  --color-text: #121826;
+  --color-text-muted: #5B6678;
+  --color-text-faint: #8A93A3;
+
+  --color-sidebar-bg: #0E1A2B;
+  --color-sidebar-text: #B4BFCF;
+  --color-sidebar-text-active: #FFFFFF;
+  --color-sidebar-hover: #16263D;
+  --color-sidebar-active: #1B2E49;
+
+  --color-primary: #0E1A2B;
+  --color-primary-text: #FFFFFF;
+  --color-primary-hover: #1B2E49;
+
+  --color-accent: #B7791F;
+  --color-accent-soft: #F6EBD3;
+
+  --color-success: #2E7D5B;
+  --color-success-soft: #E6F4EA;
+  --color-warning: #B7791F;
+  --color-warning-soft: #FDF4E7;
+  --color-danger: #B4412F;
+  --color-danger-soft: #FCEBE8;
+  --color-info: #2F5D8A;
+  --color-info-soft: #EBF3FA;
+
+  /* Chart Palette (6 solid colors) */
+  --chart-navy: #1F3A5F;
+  --chart-steel: #5B7FA6;
+  --chart-brass: #C98A1B;
+  --chart-sage: #6B8F71;
+  --chart-clay: #B5604A;
+  --chart-slate: #94A3B8;
+
+  /* Shadows - subtle shadow only for modals, dropdowns, drawers */
+  --shadow-overlay: 0 4px 16px rgba(18, 24, 38, 0.08);
+
+  /* Radius */
+  --radius-sm: 4px;
+  --radius-control: 6px;
+  --radius-card: 10px;
+
+  /* Transition timing */
+  --transition-fast: 180ms ease;
+}
+
+html.dark {
+  /* Dark Theme Tokens */
+  --color-bg: #0A111D;
+  --color-surface: #111A2B;
+  --color-surface-2: #172338;
+  --color-border: #243350;
+  --color-border-strong: #324468;
+
+  --color-text: #E7EBF3;
+  --color-text-muted: #9AA6BB;
+  --color-text-faint: #6F7C93;
+
+  --color-sidebar-bg: #070D17;
+  --color-sidebar-text: #8FA2BF;
+  --color-sidebar-text-active: #FFFFFF;
+  --color-sidebar-hover: #0F1D33;
+  --color-sidebar-active: #14213A;
+
+  --color-primary: #E3AE4A;
+  --color-primary-text: #0A111D;
+  --color-primary-hover: #F0BC59;
+
+  --color-accent: #E3AE4A;
+  --color-accent-soft: #2A2113;
+
+  --color-success: #4FB38A;
+  --color-success-soft: #122B22;
+  --color-warning: #E3AE4A;
+  --color-warning-soft: #2A2113;
+  --color-danger: #E2705A;
+  --color-danger-soft: #301714;
+  --color-info: #6FA3D8;
+  --color-info-soft: #142436;
+
+  /* Chart Palette (same 6 solid colors with tuned dark contrast) */
+  --chart-navy: #355A8A;
+  --chart-steel: #779BC2;
+  --chart-brass: #E3AE4A;
+  --chart-sage: #84AC8A;
+  --chart-clay: #CF7761;
+  --chart-slate: #A3B3C7;
+
+  --shadow-overlay: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Monospace alignment */
+.font-mono, .mono-num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Serif Headings */
+h1, h2, h3, .font-serif {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+/* Section and table uppercase labels */
+.section-label, .table-header-label {
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+/* Focus styles */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 1px;
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-surface-2);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-strong);
+  border-radius: 4px;
+}

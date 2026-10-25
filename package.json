@@ -1,0 +1,20 @@
+{
+  "name": "hackathon-starter-kit",
+  "version": "1.0.0",
+  "description": "HCM Lite — Human Capital Management web application (Saylani Hackathon)",
+  "private": true,
+  "scripts": {
+    "install:all": "npm install && npm install --prefix server && npm install --prefix client",
+    "dev": "concurrently -n \"SERVER,CLIENT\" -c \"cyan,magenta\" \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
+    "dev:server": "npm run dev --prefix server",
+    "dev:client": "npm run dev --prefix client",
+    "build": "npm run build --prefix server && npm run build --prefix client",
+    "build:server": "npm run build --prefix server",
+    "build:client": "npm run build --prefix client",
+    "test": "npm run test --prefix server",
+    "check:emoji": "npm run check:emoji --prefix client"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
